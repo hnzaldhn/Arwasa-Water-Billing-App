@@ -1,0 +1,7 @@
+{
+  "name": "waterbilling",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

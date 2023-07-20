@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Search</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="card-container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Search</ion-card-title>
+      </ion-card-header>
+      <ion-item>
+        <ion-input placeholder="Enter Account Number" type="number" required [(ngModel)]="enter"></ion-input>
+        <ion-button shape="round" color="primary" (click)="onGet()">Get Details</ion-button>
+      </ion-item>
+    </ion-card>
+    <ion-item>
+      <ion-select style="font-family: Poppins; color:white;" label="Search by" label-placement="Search by" [(ngModel)]="selector">
+        <ion-select-option value="Client">Client</ion-select-option>
+        <ion-select-option value="Ongoing">Ongoing Bills</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <br>
+    <ion-segment color="light" [(ngModel)]="selectTabs">
+      <ion-segment-button value="ogw">
+        <ion-label style="color: white; font-family:Poppins">Clients</ion-label>
+      </ion-segment-button>
+      <ion-segment-button color="light" value="wbh">
+        <ion-label style="color: white; font-family:Poppins">ONGOING BILLS</ion-label>
+      </ion-segment-button>
+  </ion-segment>
+  <ion-card *ngIf="selectTabs == 'ogw'">
+    <ion-item lines = "full">
+      <p style="font-family: Poppins; font-weight:bold; font-size:16px; margin-left:100px; color:white;">CLIENTS INFORMATION</p>
+    </ion-item>
+    <ion-item *ngFor="let data of clientData">
+      <ion-label style="font-family: Poppins; font-size:14px;">
+        <p style="color: white;">Account Number: <b style="color: white;">{{data.accnumber}}</b></p>
+        <p style="color: white;">Meter Number: <b style="color: white;">{{data.metnumber}}</b></p>
+        <p style="color: white;">Full Name: <b style="color: white;">{{data.fullname}}</b></p>
+        <p style="color: white;">Contact Number: <b  style="color: white;">{{data.contact}}</b></p>
+        <p style="color: white;">Address: <b style="color: white;">{{data.address}}</b></p>
+        <p style="color: white;">Email Address: <b style="color: white;">{{data.emailadd}}</b></p>
+        <p style="color: white;">Connection Status: <b style="color: white;">{{data.connstats}}</b></p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+  <ion-card *ngIf="selectTabs == 'wbh'">
+    <ion-item lines = "full">
+      <p style="color:white; font-family: Poppins; font-weight:bold; font-size:16px; margin-left:120px;">ONGOING BILLS</p>
+    </ion-item>
+    <ion-item-sliding *ngFor="let d of billdata">
+      <ion-item-options side="start">
+        <ion-item-option>Edit</ion-item-option>
+      </ion-item-options>
+      <ion-item>
+        <ion-label style="font-family: Poppins; font-size:14px;">
+        <p style="color:white">Account Number: <b style="color:white">{{d.accnumber}}</b></p>
+        <p style="color:white">Meter Number: <b style="color:white">{{d.metnumber}}</b></p>
+        <p style="color:white">Full Name: <b style="color:white">{{d.fullname}}</b></p>
+        <p style="color:white">Month Of: <b style="color:white">{{d.monthof}}</b></p>
+        <p style="color:white">Previous Reading: <b style="color:white">{{d.prevread}}</b></p>
+        <p style="color:white">Present Reading: <b style="color:white">{{d.presread}}</b></p>
+        <p style="color:white">Total Consumption: <b style="color:white">{{d.totalcons}}</b></p>
+        <p style="color:white">Due Date: <b style="color:white">{{d.duedate}}</b></p>
+        <p style="color:white">Pay Status: <b style="color:white">{{d.paystatus}}</b></p>
+        <p style="color:white">Total Amount: <b style="color:white">{{d.total_amount}}</b></p>
+      </ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option color="danger">Delete</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-card>
+  </div>
+</ion-content>

@@ -1,0 +1,38 @@
+ion-content::part(background) {
+    background: linear-gradient(125deg, #2d388a 0%, #00aeef 100%);
+}
+ion-toolbar {
+    --background: linear-gradient(65deg, #2d388a 0%, #00aeef 100%);
+    --color: white;
+}
+.cardtop{
+    height: 90%;
+    background-color: rgba(255, 255, 255, .1);  
+    border-radius: 15px;
+}
+
+.cardbot{
+    height: 90%;
+    margin-top: 20px;
+    background-color: rgba(255, 255, 255, .1);  
+    border-radius: 15px;
+}
+
+ion-card-title{
+    font-size: 16px; 
+    font-weight:bold;
+    font-family: Poppins;
+    color: white;
+}
+ion-title{
+    font-family: Poppins; 
+}
+ion-card-content
+{
+    color: white;
+    font-family: Poppins;
+}
+ion-icon {
+    font-size: 60px;
+    margin-bottom: 10px;
+  }

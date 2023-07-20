@@ -1,0 +1,119 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Bills</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="card-container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Add Bills</ion-card-title>
+      </ion-card-header>
+      <ion-item>
+        <ion-input placeholder="Enter Account Number" type="number" required [(ngModel)]="enter"></ion-input>
+        <ion-button shape="round" color="primary" (click)="onget()">Get Details</ion-button>
+      </ion-item>
+      <ion-item style="font-family: Poppins;">
+        <ion-label style="font-family: Poppins; color:white;">Account Number</ion-label>
+        <ion-select [(ngModel)]="accnumber">
+          <ion-select-option *ngFor="let d of dData">{{ d.accnumber }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label style="font-family: Poppins; color:white;">Meter Number</ion-label>
+        <ion-select [(ngModel)]="metnumber">
+          <ion-select-option *ngFor="let d of dData">{{ d.metnumber }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label style="font-family: Poppins; color:white;">Name</ion-label>
+        <ion-select [(ngModel)]="fname">
+          <ion-select-option *ngFor="let d of dData">{{ d.fullname }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="Month of" type="text" required [(ngModel)]="monthof"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="Meter Consumption" type="number" required [(ngModel)]="meterconsumption"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-select style="font-family: Poppins; color:white;" label="Pay Status" label-placement="Pay Status" [(ngModel)]="paystatus">
+          <ion-select-option value="Paid">Paid</ion-select-option>
+          <ion-select-option value="Pending">Pending</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label style="font-family: Poppins; color:white;">Due Date</ion-label>
+        <ion-input value="{{ date | date: 'MMMM d, YYYY' }}" id="date" class="ion-text-end" [readonly] ="true"></ion-input>
+        <ion-popover trigger="date" style="font-family: Poppins;">
+          <ng-template>
+            <ion-datetime display-format="DD.MM.YYYY" presentation="date" [(ngModel)]="date"></ion-datetime>
+          </ng-template>
+        </ion-popover>
+      </ion-item>
+    </ion-card>
+    <ion-card-content>
+      <ion-button shape="round" color="primary" (click)="saveclient()">Save Client</ion-button>
+    </ion-card-content>
+    <ion-segment color="light" [(ngModel)]="selectTabs">
+      <ion-segment-button value="ogw">
+        <ion-label style="color: white; font-family:Poppins">ONGOING BILLS</ion-label>
+      </ion-segment-button>
+      <ion-segment-button color="light" value="wbh">
+        <ion-label style="color: white; font-family:Poppins">WATERBILL HISTORY</ion-label>
+      </ion-segment-button>
+  </ion-segment>
+  <ion-card *ngIf="selectTabs == 'ogw'">
+    <ion-item lines = "full">
+      <p style="color:white; font-family: Poppins; font-weight:bold; font-size:16px; margin-left:120px;">ONGOING BILLS</p>
+    </ion-item>
+    <ion-item-sliding *ngFor="let d of billdata">
+      <ion-item>
+        <ion-label style="font-family: Poppins; font-size:14px;">
+        <p style="color:white">Account Number: <b style="color:white">{{d.accnumber}}</b></p>
+        <p style="color:white">Meter Number: <b style="color:white">{{d.metnumber}}</b></p>
+        <p style="color:white">Full Name: <b style="color:white">{{d.fullname}}</b></p>
+        <p style="color:white">Month Of: <b style="color:white">{{d.monthof}}</b></p>
+        <p style="color:white">Previous Reading: <b style="color:white">{{d.prevread}}</b></p>
+        <p style="color:white">Present Reading: <b style="color:white">{{d.presread}}</b></p>
+        <p style="color:white">Total Consumption: <b style="color:white">{{d.totalcons}}</b></p>
+        <p style="color:white">Due Date: <b style="color:white">{{d.duedate}}</b></p>
+        <p style="color:white">Pay Status: <b style="color:white">{{d.paystatus}}</b></p>
+        <p style="color:white">Total Amount: <b style="color:white">{{d.total_amount}}</b></p>
+      </ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="deleteBilling(d.accnumber)">Delete</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-card>
+  <ion-card *ngIf="selectTabs == 'wbh'">
+    <ion-item lines = "full">
+      <p style="color:white; font-family: Poppins; font-weight:bold; font-size:16px; margin-left:125px;">BILLS HISTORY</p>
+    </ion-item>
+    <ion-item-sliding *ngFor="let dh of billhisdata">
+      <ion-item>
+        <ion-label style="font-family: Poppins; font-size:14px;">
+        <p style="color:white">Account Number: <b style="color:white">{{dh.accnumber}}</b></p>
+        <p style="color:white">Meter Number: <b style="color:white">{{dh.metnumber}}</b></p>
+        <p style="color:white">Full Name: <b style="color:white">{{dh.fullname}}</b></p>
+        <p style="color:white">Month Of: <b style="color:white">{{dh.monthof}}</b></p>
+        <p style="color:white">Previous Reading: <b style="color:white">{{dh.prevread}}</b></p>
+        <p style="color:white">Present Reading: <b style="color:white">{{dh.presread}}</b></p>
+        <p style="color:white">Total Consumption: <b style="color:white">{{dh.totalcons}}</b></p>
+        <p style="color:white">Paid Date: <b style="color:white">{{dh.duedate}}</b></p>
+        <p style="color:white">Pay Status: <b style="color:white">{{dh.paystatus}}</b></p>
+        <p style="color:white">Total Amount: <b style="color:white">{{dh.total_amount}}</b></p>
+      </ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="deleteBilling(d.accnumber)">Delete</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-card>
+  </div>
+</ion-content>

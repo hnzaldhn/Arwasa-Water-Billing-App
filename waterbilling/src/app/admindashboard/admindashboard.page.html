@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="main">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-card class="cardtop">
+          <ion-card-header>
+            <ion-card-title>CLIENTS</ion-card-title>
+          </ion-card-header>
+          <ion-card-content *ngFor="let data of cclientsData">
+            <ion-icon name="people-circle"></ion-icon>
+            <h1>{{data.totalclients}}</h1>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card class="cardtop">
+          <ion-card-header>
+            <ion-card-title>ONGOING BILLS</ion-card-title>
+          </ion-card-header>
+          <ion-card-content *ngFor="let data of ogData">
+            <ion-icon name="reader"></ion-icon>
+            <h1>{{data.totalOg}}</h1>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+   
+      <ion-col size="6">
+        <ion-card class="cardbot">
+          <ion-card-header>
+            <ion-card-title>CONNECTED</ion-card-title>
+          </ion-card-header>
+          <ion-card-content *ngFor="let data of connectData">
+            <ion-icon name="link"></ion-icon>
+            <h1>{{data.totalconnected}}</h1>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card class="cardbot">
+          <ion-card-header>
+            <ion-card-title>DISCONNECTED</ion-card-title>
+          </ion-card-header>
+          <ion-card-content *ngFor="let data of dcData">
+            <ion-icon name="unlink"></ion-icon>
+            <h1>{{data.totaldc}}</h1>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

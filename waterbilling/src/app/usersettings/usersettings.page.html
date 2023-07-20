@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Details</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+<ion-content>
+  <div class="card-container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Details</ion-card-title>
+      </ion-card-header>
+      <ion-item lines="none">
+        <ion-input placeholder="Enter Account Number" type="number" required [(ngModel)]="enter"></ion-input>
+      </ion-item> 
+    </ion-card>
+    <ion-card-content>
+      <ion-button shape="round" color="primary" (click)="onView()">Get Details</ion-button>
+    </ion-card-content>
+    <ion-item lines = "full">
+      <p style="font-family: Poppins; font-weight:bold; font-size:16px; margin-left:100px; color:white;">CLIENTS INFORMATION</p>
+    </ion-item>
+    <ion-item  *ngFor="let data of clientData" lines="none">
+      <ion-label style="font-family: Poppins; font-size:14px;">
+        <p style="color: white;">Account Number: <b style="color: white;">{{data.accnumber}}</b></p>
+        <p style="color: white;">Meter Number: <b style="color: white;">{{data.metnumber}}</b></p>
+        <p style="color: white;">Full Name: <b style="color: white;">{{data.fullname}}</b></p>
+        <p style="color: white;">Contact Number: <b  style="color: white;">{{data.contact}}</b></p>
+        <p style="color: white;">Address: <b style="color: white;">{{data.address}}</b></p>
+        <p style="color: white;">Email Address: <b style="color: white;">{{data.emailadd}}</b></p>
+        <p style="color: white;">Connection Status: <b style="color: white;">{{data.connstats}}</b></p>
+      </ion-label>
+    </ion-item>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Users</ion-card-title>
+      </ion-card-header>
+      <ion-item lines="full">
+        <ion-input placeholder="Full Name" type="text" required [(ngModel)]="fname"></ion-input>
+      </ion-item>
+        <ion-item lines="full">
+          <ion-input placeholder="Email" type="email" required [(ngModel)]="email"></ion-input>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-input placeholder="Password" name="password" [type]="showPassword ? 'text' : 'password'" required [(ngModel)]="password"></ion-input>
+          <ion-icon color ="light" slot="end" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
+        </ion-item>
+      <ion-card-content>
+        <ion-button shape="round" color="primary" (click)="onSave()">Update Users</ion-button>
+      </ion-card-content>
+      <ion-item lines = "full">
+        <p style="font-family: Poppins; font-weight:bold; font-size:16px; margin-left:100px; color:white;">USERS INFORMATION</p>
+      </ion-item>
+        <ion-item-sliding *ngFor="let u of clientData">
+          <ion-item-options side="start">
+            <ion-item-option (click)="editUser(u)">Edit</ion-item-option>
+          </ion-item-options>
+          <ion-item>
+            <ion-label>
+              <p  style="color: white; font-family:Poppins;font-size:15px">Full Name: <b>{{u.fullname}}</b></p>
+              <p  style="color: white; font-family:Poppins;font-size:15px">Email: <b>{{u.email}}</b></p>
+            </ion-label>
+          </ion-item>
+        </ion-item-sliding>
+    </ion-card>
+  </div>
+
+</ion-content>

@@ -1,0 +1,49 @@
+ion-content::part(background) {
+    background: linear-gradient(125deg, #2d388a 0%, #00aeef 100%);
+}
+ion-toolbar {
+    --background: linear-gradient(65deg, #2d388a 0%, #00aeef 100%);
+    --color: white;
+}
+ion-card{
+    background-color: rgba(255, 255, 255, .1);  
+}
+ion-title{
+    font-family: Poppins;
+    color: white;
+}
+
+ion-select{
+    font-family: Poppins;
+    color:white;
+    border: solid 1px rgb(255, 255, 255);
+    text-indent: 15px;
+}
+
+ion-card-title{
+    font-family: Poppins;
+    font-weight: bold;
+    color: white;
+    
+}
+ion-button{
+    font-family: Poppins;
+    margin-left: 240px;
+}
+
+ion-item
+{
+    --background:rgba(255, 255, 255, .1); 
+}
+:host {
+    ion-input {
+        --border-color: white; 
+        --highlight-color-valid: rgb(255, 255, 255);
+        --highlight-color-invalid: white;
+        --highlight-color-focused: rgb(255, 255, 255); 
+        color: white;
+        font-family: Poppins;
+    }
+}
+
+
